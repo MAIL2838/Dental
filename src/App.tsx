@@ -335,9 +335,6 @@ function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-30">
-        <div className="w-px h-12 bg-gradient-to-b from-transparent via-[#d9d9d9] to-transparent mx-auto" />
-      </div>
     </section>
   );
 }
