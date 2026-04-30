@@ -10,7 +10,6 @@ const NAV_LINKS = [
   { label: 'Contact', href: '#contact' },
 ];
 
-
 const TREATMENTS = [
   {
     title: 'Smile Makeover',
