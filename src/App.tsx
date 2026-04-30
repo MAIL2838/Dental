@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { Menu, X, ChevronDown, ChevronUp, ArrowUp } from 'lucide-react';
 
 const NAV_LINKS = [
   { label: 'Treatments', href: '#treatments' },
@@ -37,7 +37,26 @@ const TREATMENTS = [
   },
 ];
 
-const RESULTS = [
+const TESTIMONIALS = [
+  {
+    name: 'Catherine M.',
+    line: 'My smile looks completely natural. No one guesses I had work done.',
+  },
+  {
+    name: 'James R.',
+    line: 'The implant process was smoother than I ever expected. Wish I did it sooner.',
+  },
+  {
+    name: 'Priya S.',
+    line: 'From consultation to final result, every step felt considered and personal.',
+  },
+  {
+    name: 'David L.',
+    line: 'Years of hiding my teeth. Now I smile without thinking about it.',
+  },
+];
+
+const BEFORE_AFTER = [
   {
     before: 'Severe discolouration and misalignment',
     after: 'Full smile restoration with veneers',
@@ -58,8 +77,8 @@ const RESULTS = [
 const PRICING = [
   {
     name: 'Consultation',
-    price: '£95',
-    note: 'Redeemable against treatment',
+    price: '\u00A3150',
+    note: 'Fully redeemable against treatment',
     features: [
       'Full oral assessment',
       'Digital smile preview',
@@ -70,7 +89,7 @@ const PRICING = [
   },
   {
     name: 'Veneers',
-    price: 'From £850',
+    price: 'From \u00A3850',
     note: 'Per tooth',
     features: [
       'Porcelain or composite',
@@ -82,7 +101,7 @@ const PRICING = [
   },
   {
     name: 'Implants',
-    price: 'From £2,400',
+    price: 'From \u00A32,400',
     note: 'Per implant',
     features: [
       'Titanium implant',
@@ -94,31 +113,54 @@ const PRICING = [
   },
 ];
 
-const FAQS = [
+const TRUST_CARDS = [
   {
-    question: 'How long do veneers last?',
-    answer:
-      'Porcelain veneers typically last between 10 and 20 years with proper care. Regular maintenance appointments and avoiding excessive force on the teeth significantly extend their lifespan.',
+    title: 'Natural Aesthetics',
+    description:
+      'Results designed to complement your features, not override them. The finest work goes unnoticed.',
   },
+  {
+    title: 'Long-Term Durability',
+    description:
+      'Premium materials and meticulous technique ensure restorations that last decades, not years.',
+  },
+  {
+    title: 'Patient-First Care',
+    description:
+      'Transparent pricing, honest timelines, and a clinical approach built around your comfort and goals.',
+  },
+  {
+    title: 'Clinical Precision',
+    description:
+      'Every procedure is planned digitally and executed with exacting attention to proportion and symmetry.',
+  },
+];
+
+const FAQS = [
   {
     question: 'Is the treatment painful?',
     answer:
       'All procedures are performed under local anaesthetic. Patients report minimal discomfort during treatment. Post-procedure sensitivity, if any, typically resolves within a few days.',
   },
   {
-    question: 'How soon can I see results?',
+    question: 'How safe are dental implants and veneers?',
     answer:
-      'Whitening results are visible immediately following treatment. Veneers and implants require a short fabrication period, but the transformation is visible at your fitting appointment.',
+      'Both procedures have excellent safety records when performed by an experienced practitioner. Titanium implants have been used for decades with success rates above 95%. Porcelain veneers are a conservative treatment that preserves most of your natural tooth structure.',
   },
   {
-    question: 'Do you offer payment plans?',
+    question: 'How long do veneers and implants last?',
     answer:
-      'Yes. Interest-free finance is available on treatments over £500, subject to credit approval. Our patient coordinator will walk you through all available options at your consultation.',
+      'Porcelain veneers typically last between 10 and 20 years with proper care. Dental implants are designed to be a permanent solution and carry a lifetime structural guarantee. Regular maintenance appointments significantly extend the lifespan of any restoration.',
   },
   {
-    question: 'What is involved in a smile makeover?',
+    question: 'What does treatment cost and do you offer payment plans?',
     answer:
-      'A smile makeover begins with a comprehensive consultation to assess your goals, dental health, and facial proportions. A bespoke plan is then designed combining whichever treatments will achieve your ideal outcome.',
+      'Costs vary by treatment. Consultations are \u00A3150, fully redeemable against any treatment. Interest-free finance is available on treatments over \u00A3500, subject to credit approval. Our patient coordinator will walk you through all available options at your consultation.',
+  },
+  {
+    question: 'What is the recovery time?',
+    answer:
+      'Whitening requires no recovery. Veneer patients return to normal activity the same day. Implant patients typically resume normal routines within 24 to 48 hours, with full integration over the following weeks.',
   },
 ];
 
@@ -367,7 +409,7 @@ function Treatments() {
   );
 }
 
-function ResultCard({
+function BeforeAfterCard({
   before,
   after,
   treatment,
@@ -423,8 +465,35 @@ function ResultCard({
   );
 }
 
-function Results() {
+function TestimonialCard({
+  name,
+  line,
+  delay,
+}: {
+  name: string;
+  line: string;
+  delay: number;
+}) {
   const { ref, visible } = useInView();
+  return (
+    <div
+      ref={ref}
+      className={`border border-white/[0.08] bg-[#0c0c0d] rounded-sm p-6 transition-all duration-700 ${
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+      }`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <p className="text-[#d9d9d9] text-sm font-light leading-relaxed mb-5 italic">
+        &ldquo;{line}&rdquo;
+      </p>
+      <p className="text-[#9a9a9a] text-xs font-medium tracking-wide">{name}</p>
+    </div>
+  );
+}
+
+function SocialProof() {
+  const { ref, visible } = useInView();
+
   return (
     <section id="results" className="bg-[#141416] py-28 px-6">
       <div className="max-w-7xl mx-auto">
@@ -442,10 +511,21 @@ function Results() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {RESULTS.map((r, i) => (
-            <ResultCard key={i} {...r} delay={i * 100} />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-20">
+          {BEFORE_AFTER.map((r, i) => (
+            <BeforeAfterCard key={i} {...r} delay={i * 100} />
           ))}
+        </div>
+
+        <div className="border-t border-white/[0.06] pt-20">
+          <p className="text-[#9a9a9a] text-xs font-medium tracking-[0.25em] uppercase mb-12 text-center">
+            What Patients Say
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {TESTIMONIALS.map((t, i) => (
+              <TestimonialCard key={i} {...t} delay={i * 100} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -620,9 +700,66 @@ function Pricing() {
   );
 }
 
+function TrustCard({
+  title,
+  description,
+  delay,
+}: {
+  title: string;
+  description: string;
+  delay: number;
+}) {
+  const { ref, visible } = useInView();
+  return (
+    <div
+      ref={ref}
+      className={`border border-white/[0.08] bg-[#141416] rounded-sm p-8 transition-all duration-700 ${
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+      }`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      <h3 className="font-playfair text-lg font-semibold text-[#f2f2f2] mb-3">{title}</h3>
+      <p className="text-[#9a9a9a] text-sm font-light leading-relaxed">{description}</p>
+    </div>
+  );
+}
+
+function Trust() {
+  const { ref, visible } = useInView();
+  return (
+    <section className="bg-[#0c0c0d] py-28 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div
+          ref={ref}
+          className={`mb-16 transition-all duration-700 ${
+            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+          }`}
+        >
+          <p className="text-[#9a9a9a] text-xs font-medium tracking-[0.25em] uppercase mb-4">
+            Our Commitment
+          </p>
+          <h2 className="font-playfair text-4xl lg:text-5xl font-semibold text-[#f2f2f2] shine-text max-w-xl">
+            Clinical Precision. Trusted Results.
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {TRUST_CARDS.map((card, i) => (
+            <TrustCard key={card.title} {...card} delay={i * 100} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function FAQ() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const { ref, visible } = useInView();
+
+  const toggle = (i: number) => {
+    setOpenIdx((prev) => (prev === i ? null : i));
+  };
 
   return (
     <section id="faq" className="bg-[#0c0c0d] py-28 px-6">
@@ -649,25 +786,58 @@ function FAQ() {
             >
               <button
                 className="w-full flex items-center justify-between px-7 py-5 text-left group"
-                onClick={() => setOpenIdx(openIdx === i ? null : i)}
+                onClick={() => toggle(i)}
               >
                 <span className="text-[#f2f2f2] text-sm font-medium pr-6 group-hover:text-white transition-colors">
                   {faq.question}
                 </span>
-                <span className="text-[#9a9a9a] shrink-0">
+                <span className="text-[#9a9a9a] shrink-0 transition-transform duration-300">
                   {openIdx === i ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </span>
               </button>
-              {openIdx === i && (
+              <div
+                className="overflow-hidden transition-all duration-300 ease-in-out"
+                style={{
+                  maxHeight: openIdx === i ? '200px' : '0',
+                  opacity: openIdx === i ? 1 : 0,
+                }}
+              >
                 <div className="px-7 pb-6">
                   <p className="text-[#9a9a9a] text-sm font-light leading-relaxed">
                     {faq.answer}
                   </p>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function FinalCTA() {
+  const { ref, visible } = useInView();
+  return (
+    <section className="bg-[#141416] py-28 px-6">
+      <div
+        ref={ref}
+        className={`max-w-3xl mx-auto text-center transition-all duration-700 ${
+          visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+        }`}
+      >
+        <h2 className="font-playfair text-4xl lg:text-5xl font-semibold text-[#f2f2f2] shine-text mb-6">
+          Start Your Transformation
+        </h2>
+        <p className="text-[#9a9a9a] text-base font-light leading-relaxed max-w-lg mx-auto mb-10">
+          Every journey begins with a conversation. Reserve your consultation and take the first step toward the results you deserve.
+        </p>
+        <button
+          onClick={() => scrollTo('#contact')}
+          className="px-10 py-4 bg-[#f2f2f2] text-[#0c0c0d] text-sm font-semibold tracking-widest uppercase rounded-sm hover:bg-white transition-all duration-200 hover:scale-[1.02]"
+        >
+          Book Consultation
+        </button>
       </div>
     </section>
   );
@@ -682,6 +852,7 @@ function Contact() {
     message: '',
     treatment: '',
   });
+  const [consent, setConsent] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -693,6 +864,7 @@ function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!consent) return;
     setLoading(true);
     await new Promise((r) => setTimeout(r, 900));
     setLoading(false);
@@ -700,7 +872,7 @@ function Contact() {
   };
 
   return (
-    <section id="contact" className="bg-[#141416] py-28 px-6">
+    <section id="contact" className="bg-[#0c0c0d] py-28 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
           <div
@@ -737,7 +909,7 @@ function Contact() {
             </div>
           </div>
 
-          <div className="border border-white/[0.08] bg-[#0c0c0d] rounded-sm p-8 lg:p-10">
+          <div className="border border-white/[0.08] bg-[#141416] rounded-sm p-8 lg:p-10">
             {submitted ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-12">
                 <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center mb-6">
@@ -772,7 +944,7 @@ function Contact() {
                       required
                       value={form.name}
                       onChange={handleChange}
-                      className="w-full bg-[#141416] border border-white/[0.08] rounded-sm px-4 py-3 text-[#f2f2f2] text-sm placeholder-[#9a9a9a]/40 focus:outline-none focus:border-white/20 transition-colors"
+                      className="w-full bg-[#0c0c0d] border border-white/[0.08] rounded-sm px-4 py-3 text-[#f2f2f2] text-sm placeholder-[#9a9a9a]/40 focus:outline-none focus:border-white/20 transition-colors"
                       placeholder="Your name"
                     />
                   </div>
@@ -785,7 +957,7 @@ function Contact() {
                       name="phone"
                       value={form.phone}
                       onChange={handleChange}
-                      className="w-full bg-[#141416] border border-white/[0.08] rounded-sm px-4 py-3 text-[#f2f2f2] text-sm placeholder-[#9a9a9a]/40 focus:outline-none focus:border-white/20 transition-colors"
+                      className="w-full bg-[#0c0c0d] border border-white/[0.08] rounded-sm px-4 py-3 text-[#f2f2f2] text-sm placeholder-[#9a9a9a]/40 focus:outline-none focus:border-white/20 transition-colors"
                       placeholder="+44..."
                     />
                   </div>
@@ -800,7 +972,7 @@ function Contact() {
                     required
                     value={form.email}
                     onChange={handleChange}
-                    className="w-full bg-[#141416] border border-white/[0.08] rounded-sm px-4 py-3 text-[#f2f2f2] text-sm placeholder-[#9a9a9a]/40 focus:outline-none focus:border-white/20 transition-colors"
+                    className="w-full bg-[#0c0c0d] border border-white/[0.08] rounded-sm px-4 py-3 text-[#f2f2f2] text-sm placeholder-[#9a9a9a]/40 focus:outline-none focus:border-white/20 transition-colors"
                     placeholder="you@email.com"
                   />
                 </div>
@@ -812,24 +984,24 @@ function Contact() {
                     name="treatment"
                     value={form.treatment}
                     onChange={handleChange}
-                    className="w-full bg-[#141416] border border-white/[0.08] rounded-sm px-4 py-3 text-[#f2f2f2] text-sm focus:outline-none focus:border-white/20 transition-colors appearance-none"
+                    className="w-full bg-[#0c0c0d] border border-white/[0.08] rounded-sm px-4 py-3 text-[#f2f2f2] text-sm focus:outline-none focus:border-white/20 transition-colors appearance-none"
                   >
-                    <option value="" className="bg-[#141416]">
+                    <option value="" className="bg-[#0c0c0d]">
                       Select a treatment
                     </option>
-                    <option value="smile-makeover" className="bg-[#141416]">
+                    <option value="smile-makeover" className="bg-[#0c0c0d]">
                       Smile Makeover
                     </option>
-                    <option value="implants" className="bg-[#141416]">
+                    <option value="implants" className="bg-[#0c0c0d]">
                       Dental Implants
                     </option>
-                    <option value="veneers" className="bg-[#141416]">
+                    <option value="veneers" className="bg-[#0c0c0d]">
                       Porcelain Veneers
                     </option>
-                    <option value="whitening" className="bg-[#141416]">
+                    <option value="whitening" className="bg-[#0c0c0d]">
                       Teeth Whitening
                     </option>
-                    <option value="other" className="bg-[#141416]">
+                    <option value="other" className="bg-[#0c0c0d]">
                       Other / Not Sure
                     </option>
                   </select>
@@ -843,26 +1015,50 @@ function Contact() {
                     value={form.message}
                     onChange={handleChange}
                     rows={3}
-                    className="w-full bg-[#141416] border border-white/[0.08] rounded-sm px-4 py-3 text-[#f2f2f2] text-sm placeholder-[#9a9a9a]/40 focus:outline-none focus:border-white/20 transition-colors resize-none"
+                    className="w-full bg-[#0c0c0d] border border-white/[0.08] rounded-sm px-4 py-3 text-[#f2f2f2] text-sm placeholder-[#9a9a9a]/40 focus:outline-none focus:border-white/20 transition-colors resize-none"
                     placeholder="Tell us anything you would like us to know before your visit."
                   />
                 </div>
+                <label className="flex items-start gap-3 cursor-pointer group">
+                  <input
+                    type="checkbox"
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    className="mt-0.5 w-4 h-4 shrink-0 rounded-sm border border-white/[0.15] bg-[#0c0c0d] appearance-none checked:bg-[#f2f2f2] checked:border-[#f2f2f2] transition-colors cursor-pointer relative
+                    [&:checked::after]:content-[''] [&:checked::after]:absolute [&:checked::after]:left-[5px] [&:checked::after]:top-[2px] [&:checked::after]:w-[5px] [&:checked::after]:h-[9px] [&:checked::after]:border-r-2 [&:checked::after]:border-b-2 [&:checked::after]:border-[#0c0c0d] [&:checked::after]:rotate-45"
+                  />
+                  <span className="text-[#9a9a9a] text-xs font-light leading-relaxed group-hover:text-[#a8b0b8] transition-colors">
+                    I consent to Dr. Hale&apos;s practice storing my details to arrange my consultation. Your data is handled in confidence and never shared with third parties.
+                  </span>
+                </label>
                 <button
                   type="submit"
-                  disabled={loading}
-                  className="w-full py-4 bg-[#f2f2f2] text-[#0c0c0d] text-sm font-semibold tracking-widest uppercase rounded-sm hover:bg-white transition-all duration-200 disabled:opacity-60"
+                  disabled={loading || !consent}
+                  className="w-full py-4 bg-[#f2f2f2] text-[#0c0c0d] text-sm font-semibold tracking-widest uppercase rounded-sm hover:bg-white transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   {loading ? 'Sending...' : 'Book Consultation'}
                 </button>
-                <p className="text-[#9a9a9a] text-[11px] text-center">
-                  Your details are handled in confidence and never shared with third parties.
-                </p>
               </form>
             )}
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function ScrollToTop() {
+  const scrolled = useScrolled(400);
+  return (
+    <button
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      className={`fixed bottom-6 right-6 z-40 w-10 h-10 bg-[#1a1a1c] border border-white/[0.1] rounded-sm flex items-center justify-center text-[#9a9a9a] hover:text-[#f2f2f2] hover:border-white/20 transition-all duration-300 ${
+        scrolled ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+      }`}
+      aria-label="Scroll to top"
+    >
+      <ArrowUp size={16} />
+    </button>
   );
 }
 
@@ -896,12 +1092,15 @@ export default function App() {
       <Navbar />
       <Hero />
       <Treatments />
-      <Results />
+      <SocialProof />
       <About />
       <Pricing />
+      <Trust />
       <FAQ />
+      <FinalCTA />
       <Contact />
       <Footer />
+      <ScrollToTop />
     </>
   );
 }
