@@ -572,34 +572,17 @@ function About() {
                 background: 'linear-gradient(160deg, #1e1e20 0%, #141416 40%, #0e0e10 100%)',
               }}
             >
-              <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-10">
-                <div className="w-20 h-20 rounded-full border border-white/10 flex items-center justify-center mb-8 bg-[#1a1a1c]">
-                  <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 32 32"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle cx="16" cy="10" r="5" stroke="#d9d9d9" strokeWidth="1.5" fill="none" />
-                    <path
-                      d="M6 26c0-5.523 4.477-10 10-10s10 4.477 10 10"
-                      stroke="#d9d9d9"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      fill="none"
-                    />
-                  </svg>
-                </div>
-                <p className="font-playfair text-2xl font-semibold text-[#f2f2f2] mb-2">
+              <img
+                src="/image.png"
+                alt="Dr. Sebastian Hale"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0d] via-transparent to-transparent flex flex-col items-end justify-end p-8">
+                <p className="font-playfair text-xl font-semibold text-[#f2f2f2] mb-1 text-right">
                   Dr. Sebastian Hale
                 </p>
-                <p className="text-[#9a9a9a] text-sm tracking-wide mb-6">
+                <p className="text-[#9a9a9a] text-xs tracking-wide text-right">
                   BDS, MFDS RCSEd, MClinDent
-                </p>
-                <div className="w-12 h-px bg-white/10 mb-6" />
-                <p className="text-[#9a9a9a] text-xs tracking-widest uppercase">
-                  15+ Years in Cosmetic Dentistry
                 </p>
               </div>
             </div>
