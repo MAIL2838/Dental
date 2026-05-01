@@ -572,64 +572,19 @@ function About() {
                 background: 'linear-gradient(160deg, #1e1e20 0%, #141416 40%, #0e0e10 100%)',
               }}
             >
-              <svg
-                viewBox="0 0 400 533"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-full h-full"
-              >
-                <defs>
-                  <linearGradient id="bg" x1="0" y1="0" x2="0.3" y2="1">
-                    <stop offset="0%" stopColor="#1e1e20" />
-                    <stop offset="50%" stopColor="#141416" />
-                    <stop offset="100%" stopColor="#0e0e10" />
-                  </linearGradient>
-                  <linearGradient id="coatGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#2a2a2e" />
-                    <stop offset="100%" stopColor="#1a1a1c" />
-                  </linearGradient>
-                  <linearGradient id="shirtGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#e8e8e8" />
-                    <stop offset="100%" stopColor="#d0d0d0" />
-                  </linearGradient>
-                  <radialGradient id="faceGlow" cx="0.5" cy="0.35" r="0.5">
-                    <stop offset="0%" stopColor="#d4b896" />
-                    <stop offset="100%" stopColor="#c4a07a" />
-                  </radialGradient>
-                  <linearGradient id="fadeBottom" x1="0" y1="0.7" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#0c0c0d" stopOpacity="0" />
-                    <stop offset="100%" stopColor="#0c0c0d" stopOpacity="1" />
-                  </linearGradient>
-                </defs>
-                <rect width="400" height="533" fill="url(#bg)" />
-                {/* Shoulders and coat */}
-                <path d="M100,533 L100,380 Q100,340 140,320 L180,300 Q200,290 220,300 L260,320 Q300,340 300,380 L300,533 Z" fill="url(#coatGrad)" />
-                {/* Shirt collar V */}
-                <path d="M175,300 L200,360 L225,300" fill="url(#shirtGrad)" />
-                {/* Neck */}
-                <rect x="178" y="260" width="44" height="50" rx="8" fill="#c4a07a" />
-                {/* Head */}
-                <ellipse cx="200" cy="210" rx="65" ry="80" fill="url(#faceGlow)" />
-                {/* Hair */}
-                <path d="M135,195 Q135,120 200,115 Q265,120 265,195 Q265,155 240,145 Q200,135 160,145 Q135,155 135,195 Z" fill="#2c2c2e" />
-                {/* Eyes */}
-                <ellipse cx="175" cy="210" rx="8" ry="4" fill="#1a1a1c" />
-                <ellipse cx="225" cy="210" rx="8" ry="4" fill="#1a1a1c" />
-                {/* Eyebrows */}
-                <path d="M160,198 Q175,193 190,198" stroke="#3a3a3c" strokeWidth="2" fill="none" />
-                <path d="M210,198 Q225,193 240,198" stroke="#3a3a3c" strokeWidth="2" fill="none" />
-                {/* Nose */}
-                <path d="M197,220 L193,245 L207,245 L203,220" stroke="#b08a60" strokeWidth="1" fill="none" />
-                {/* Mouth - subtle smile */}
-                <path d="M185,260 Q200,270 215,260" stroke="#a07050" strokeWidth="1.5" fill="none" />
-                {/* Ears */}
-                <ellipse cx="135" cy="215" rx="8" ry="14" fill="#c4a07a" />
-                <ellipse cx="265" cy="215" rx="8" ry="14" fill="#c4a07a" />
-                {/* Fade overlay at bottom */}
-                <rect width="400" height="533" fill="url(#fadeBottom)" />
-                {/* Name and credentials */}
-                <text x="32" y="490" fontFamily="serif" fontSize="20" fontWeight="600" fill="#f2f2f2">Dr. Sebastian Hale</text>
-                <text x="32" y="512" fontFamily="sans-serif" fontSize="11" fill="#9a9a9a" letterSpacing="1">BDS, MFDS RCSEd, MClinDent</text>
-              </svg>
+              <img
+                src="/image.png"
+                alt="Dr. Sebastian Hale"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0d] via-transparent to-transparent flex flex-col items-end justify-end p-8">
+                <p className="font-playfair text-xl font-semibold text-[#f2f2f2] mb-1 text-right">
+                  Dr. Sebastian Hale
+                </p>
+                <p className="text-[#9a9a9a] text-xs tracking-wide text-right">
+                  BDS, MFDS RCSEd, MClinDent
+                </p>
+              </div>
             </div>
             <div
               className="absolute -bottom-4 -right-4 w-32 h-32 rounded-sm border border-white/[0.06]"
